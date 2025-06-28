@@ -21,7 +21,7 @@ class ContactController extends Controller
     public function create()
     {
         //
-        $contacts = Contact::latest()->get();
+        $contacts = Contact::orderBy('id')->get();
         return view('contact', compact('contacts'));
     }
 

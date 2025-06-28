@@ -10,6 +10,11 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("You're logged in!") }}
+                    <div class="mt-6">
+                        <a href="{{ route('blogs.index') }}" class="inline-block bg-green-700 hover:bg-green-600 text-white px-4 py-2 rounded shadow">
+                            Go to Blogs
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
