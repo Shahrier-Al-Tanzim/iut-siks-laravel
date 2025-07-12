@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HelloController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\EventController;
+
 use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
@@ -23,6 +25,8 @@ Route::get('/hello', [HelloController::class, 'show']);
 Route::get('/contact', [ContactController::class, 'create']);
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
+Route::resource('events', EventController::class);
 Route::resource('blogs', BlogController::class);
 // Route::get('/blogs', [BlogController::class, 'index'])->name('index');
 require __DIR__.'/auth.php';
+
