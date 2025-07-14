@@ -39,12 +39,15 @@ class BlogController extends Controller
         $request->validate([
             'title' => 'required',
             'content' => 'required',
+            'image' => 'nullable|image|mimes:png,jpg,png,gif,jpeg|max:2048'
         ]);
 
+        $path = $request->file('image') ? $request->file('image')->store('blog_images', 'public') : null;
         Blog::create([
             'title' => $request->title,
             'content' => $request->content,
             'author_id' => auth()->id(),
+            'image' => $path
         ]);
 
         return redirect()->route('blogs.index')->with('success', 'Blog created!');
@@ -83,11 +86,17 @@ class BlogController extends Controller
         $request->validate([
             'title' => 'required',
             'content' => 'required',
+            'image' => 'nullable|image|mimes:png,jpg,png,jpg,gif,jpeg|max:2048'
         ]);
 
+        $path = $blog->image;
+        if($request->hasFile('image')) {
+            $path = $request->file('image')->store('blog_images', 'publc');
+        }
         $blog->update([
             'title' => $request->title,
             'content' => $request->content,
+            'image' => $path
         ]);
 
         return redirect()->route('blogs.index')->with('success', 'Blog updated!');
@@ -101,7 +110,9 @@ class BlogController extends Controller
         if ($blog->author_id !== auth()->id()) {
             abort(403);
         }
-
+        if($blog->image) {
+            \Storage::disk('public')->delete($blog->image);
+        }
         $blog->delete();
         return redirect()->route('blogs.index')->with('success', 'Blog deleted!');
     }

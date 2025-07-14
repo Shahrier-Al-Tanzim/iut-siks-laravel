@@ -29,6 +29,7 @@
                         <tr class="bg-green-900">
                             <th class="px-4 py-2 text-left">Title</th>
                             <th class="px-4 py-2 text-left">Content</th>
+                            <th class="px-4 py-2 text-left">Image</th>
                             <th class="px-4 py-2 text-left">Author</th>
                             <th class="px-4 py-2 text-left">Created</th>
                             <th class="px-4 py-2 text-left">Actions</th>
@@ -39,6 +40,13 @@
                             <tr class="border-b border-gray-700 hover:bg-gray-700">
                                 <td class="px-4 py-2">{{ $blog->title }}</td>
                                 <td class="px-4 py-2">{{ $blog->content }}</td>
+                                <td class="px-4 py-2">
+                                    @if($blog->image)
+                                        <img src="{{ asset('storage/' . $blog->image) }}" class="w-16 h-16 object-cover rounded">
+                                    @else
+                                        <span class="text-gray-500">No image</span>
+                                    @endif
+                                </td>
                                 <td class="px-4 py-2">{{ $blog->author->name ?? 'Unknown' }}</td>
                                 <td class="px-4 py-2">{{ $blog->created_at->format('Y-m-d H:i') }}</td>
                                 <td class="px-4 py-2 flex gap-2">

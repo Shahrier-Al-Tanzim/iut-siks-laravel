@@ -32,7 +32,22 @@
                         <a href="{{ route('blogs.index') }}" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded mr-2">Cancel</a>
                         <button type="submit" class="bg-green-700 hover:bg-green-600 text-white px-4 py-2 rounded">Update</button>
                     </div>
+                    <!-- image preview if already exists -->
+                    @if ($blog->image)
+                        <img src="{{ asset('storage/' . $blog->image) }}" class="w-32 h-32 object-cover mb-4 rounded">
+                    @endif
+
+                    <div class="mb-4">
+                        <label class="block text-green-200 mb-2" for="image">Change Image</label>
+                        <input id="image" name="image" type="file" class="text-white">
+                    </div>
                 </form>
+                {{-- <form method="POST" action="{{ route('blogs.update', $blog) }}" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+
+                    <!-- title, content fields -->
+                </form> --}}
             </div>
         </div>
     </div>

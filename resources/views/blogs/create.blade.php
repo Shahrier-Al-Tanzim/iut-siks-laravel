@@ -18,7 +18,7 @@
                         </ul>
                     </div>
                 @endif
-                <form method="POST" action="{{ route('blogs.store') }}">
+                <form method="POST" action="{{ route('blogs.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-4">
                         <label class="block text-green-200 mb-2" for="title">Title</label>
@@ -28,6 +28,13 @@
                         <label class="block text-green-200 mb-2" for="content">Content</label>
                         <textarea id="content" name="content" rows="6" class="w-full rounded border-gray-600 bg-gray-900 text-green-100 focus:ring-green-400 focus:border-green-400" required>{{ old('content') }}</textarea>
                     </div>
+                    <div class="mb-4">
+                        <label class="block text-green-200 mb-2" for="image">Upload Image</label>
+                        <input id="image" name="image" type="file" class="text-white">
+                    </div>
+                    @if ($errors->has('image'))
+                        <p class="text-red-500 text-xs mt-1">{{ $errors->first('image') }}</p>
+                    @endif
                     <div class="flex justify-end">
                         <a href="{{ route('blogs.index') }}" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded mr-2">Cancel</a>
                         <button type="submit" class="bg-green-700 hover:bg-green-600 text-white px-4 py-2 rounded">Create</button>
